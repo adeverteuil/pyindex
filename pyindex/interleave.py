@@ -129,6 +129,10 @@ def interleave4(w, x, y, z):
     """
     Interleaves four integers.
     """
+    # http://www.forceflow.be/2013/10/07/morton-encodingdecoding-through-bit-interleaving-implementations/
+    # http://graphics.stanford.edu/~seander/bithacks.html#InterleaveTableObvious
+    # https://en.wikipedia.org/wiki/Z-order_curve
+    # https://stackoverflow.com/questions/1024754/how-to-compute-a-3d-morton-number-interleave-the-bits-of-3-ints
     n = 0
     bit_length = max(w.bit_length(), x.bit_length(), y.bit_length(), z.bit_length())
     for i in range(bit_length):
