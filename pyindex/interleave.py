@@ -129,7 +129,12 @@ def interleave4(w, x, y, z):
     """
     Interleaves four integers.
     """
-    # The lazy way.
-    a = interleave2(w, y)
-    b = interleave2(x, z)
-    return interleave2(a, b)
+    n = 0
+    bit_length = max(w.bit_length(), x.bit_length(), y.bit_length(), z.bit_length())
+    for i in range(bit_length):
+        n <<= 4
+        n |= (1 & (w >> ((bit_length - 1) - i)))
+        n |= (1 & (x >> ((bit_length - 1) - i))) << 1
+        n |= (1 & (y >> ((bit_length - 1) - i))) << 2
+        n |= (1 & (z >> ((bit_length - 1) - i))) << 3
+    return n
