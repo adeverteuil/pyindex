@@ -124,3 +124,12 @@ def deinterleave3(n):
     Deinterleaves an integer into three integers.
     """
     return unpart1by2(n), unpart1by2(n >> 1), unpart1by2(n >> 2)
+
+def interleave4(w, x, y, z):
+    """
+    Interleaves four integers.
+    """
+    # The lazy way.
+    a = interleave2(w, y)
+    b = interleave2(x, z)
+    return interleave2(a, b)

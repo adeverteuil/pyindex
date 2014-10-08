@@ -20,5 +20,15 @@ class TestInterleave(unittest.TestCase):
         interleaved = interleave.interleave2(*integers)
         self.assertEqual(integers, interleave.deinterleave2(interleaved))
 
+    def test_interleave4(self):
+        self.assertEqual(
+            hex(interleave.interleave4(0x00, 0xFF, 0x00, 0x00)),
+            '0x22222222'
+            )
+        self.assertEqual(
+            hex(interleave.interleave4(0x0000, 0xFFFF, 0x0000, 0x0000)),
+            '0x2222222222222222'
+            )
+
 if __name__ == '__main__':
     unittest.main()
