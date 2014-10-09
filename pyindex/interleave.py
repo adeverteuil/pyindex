@@ -22,14 +22,15 @@ def part1by1(n):
     n: 16-bit integer
     """
     # This algorithm gradually spreads the bits of ‘n’ until there is
-    # one bit between every bit of the original integer.
-    # Let n equal "················5432109876543210" where digits are
-    # 1s represented by their original index position and "·" are 0s.
+    # one 0 bit between every bit of the original integer.
+    # Let n equal "················FEDCBA9876543210" where hex digits
+    # are the index positions of the input integer and "·"s are 0s.
     # n will take the values
-    # "········54321098········76543210",
-    # "····5432····1098····7654····3210",
-    # "··54··32··10··98··76··54··32··10",
-    # "·5·4·3·2·1·0·9·8·7·6·5·4·3·2·1·0" and this value is returned.
+    # "········FEDCBA98········76543210",
+    # "····FEDC····BA98····7654····3210",
+    # "··FE··DC··BA··98··76··54··32··10",
+    # "·F·E·D·C·B·A·9·8·7·6·5·4·3·2·1·0",
+    # and this value is returned.
     n &= 0x0000FFFF
 
     n = (n | (n << 8)) & 0x00FF00FF
