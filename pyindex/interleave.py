@@ -105,6 +105,22 @@ def unpart1by2(n):
     return n
 
 
+def unpart1by3(n):
+    """
+    Gets every fourth bit from ‘n’.
+
+    n: 64-bit integer
+    """
+    n &= 0x1111111111111111
+
+    n = (n ^ (n >> 3)) & 0x0303030303030303
+    n = (n ^ (n >> 6)) & 0x000F000F000F000F
+    n = (n ^ (n >> 12)) & 0x000000FF000000FF
+    n = (n ^ (n >> 24)) & 0x000000000000FFFF
+
+    return n
+
+
 def interleave2(x, y):
     """
     Interleaves two integers.
