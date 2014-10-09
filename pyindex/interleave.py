@@ -21,6 +21,7 @@ def part1by1(n):
 
     n: 16-bit integer
     """
+    # (Adapted from http://stackoverflow.com/a/1024888)
     # This algorithm gradually spreads the bits of ‘n’ until there is
     # one 0 bit between every bit of the original integer.
     # Let n equal "················FEDCBA9876543210" where hex digits
@@ -172,10 +173,12 @@ def interleave4(w, x, y, z):
     """
     Interleaves four integers.
     """
+    # -- 3 algorithms and their performance compared:
     # http://www.forceflow.be/2013/10/07/morton-encodingdecoding-through-bit-interleaving-implementations/
+    # -- Bit twidling recipes in C:
     # http://graphics.stanford.edu/~seander/bithacks.html#InterleaveTableObvious
+    # -- What interleaving integers is useful for:
     # https://en.wikipedia.org/wiki/Z-order_curve
-    # https://stackoverflow.com/questions/1024754/how-to-compute-a-3d-morton-number-interleave-the-bits-of-3-ints
     return part1by3(w) | (part1by3(x) << 1) | (part1by3(y) << 2) | (part1by3(z) << 3)
 
 
