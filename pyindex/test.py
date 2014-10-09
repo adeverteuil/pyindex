@@ -30,5 +30,11 @@ class TestInterleave(unittest.TestCase):
             '0x2222222222222222'
             )
 
+    def test_part1by3(self):
+        self.assertEqual(
+            hex(interleave.part1by3(0xFFFF)),
+            '0x1111111111111111'
+            )
+
 if __name__ == '__main__':
     unittest.main()

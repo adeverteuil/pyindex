@@ -21,6 +21,15 @@ def part1by1(n):
 
     n: 16-bit integer
     """
+    # This algorithm gradually spreads the bits of ‘n’ until there is
+    # one bit between every bit of the original integer.
+    # Let n equal "················5432109876543210" where digits are
+    # 1s represented by their original index position and "·" are 0s.
+    # n will take the values
+    # "········54321098········76543210",
+    # "····5432····1098····7654····3210",
+    # "··54··32··10··98··76··54··32··10",
+    # "·5·4·3·2·1·0·9·8·7·6·5·4·3·2·1·0" and this value is returned.
     n &= 0x0000FFFF
 
     n = (n | (n << 8)) & 0x00FF00FF
@@ -43,6 +52,22 @@ def part1by2(n):
     n = (n ^ (n << 8)) & 0x0300F00F
     n = (n ^ (n << 4)) & 0x030C30C3
     n = (n ^ (n << 2)) & 0x09249249
+
+    return n
+
+
+def part1by3(n):
+    """
+    Inserts three 0 bits between each bit in ‘n’.
+
+    n: 16-bit integer
+    """
+    n &= 0xFFFF
+
+    n = (n ^ (n << 32)) & 0x000000FF000000FF
+    n = (n ^ (n << 16)) & 0x000F000F000F000F
+    n = (n ^ (n << 8)) & 0x0303030303030303
+    n = (n ^ (n << 4)) & 0x1111111111111111
 
     return n
 
