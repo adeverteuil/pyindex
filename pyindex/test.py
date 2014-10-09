@@ -30,7 +30,18 @@ class TestInterleave(unittest.TestCase):
             '0x2222222222222222'
             )
 
+    def test_deinterleave4(self):
+        integers = (0x0000, 0xFFFF, 0x0000, 0x0000)
+        self.assertEqual(
+            interleave.deinterleave4(0x2222222222222222),
+            integers
+            )
+
     def test_part1by3(self):
+        self.assertEqual(
+            hex(interleave.part1by3(0xFF)),
+            '0x11111111'
+            )
         self.assertEqual(
             hex(interleave.part1by3(0xFFFF)),
             '0x1111111111111111'

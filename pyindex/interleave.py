@@ -65,10 +65,10 @@ def part1by3(n):
     """
     n &= 0xFFFF
 
-    n = (n ^ (n << 32)) & 0x000000FF000000FF
-    n = (n ^ (n << 16)) & 0x000F000F000F000F
-    n = (n ^ (n << 8)) & 0x0303030303030303
-    n = (n ^ (n << 4)) & 0x1111111111111111
+    n = (n ^ (n << 24)) & 0x000000FF000000FF
+    n = (n ^ (n << 12)) & 0x000F000F000F000F
+    n = (n ^ (n << 6)) & 0x0303030303030303
+    n = (n ^ (n << 3)) & 0x1111111111111111
 
     return n
 
@@ -167,6 +167,7 @@ def deinterleave3(n):
     """
     return unpart1by2(n), unpart1by2(n >> 1), unpart1by2(n >> 2)
 
+
 def interleave4(w, x, y, z):
     """
     Interleaves four integers.
@@ -175,12 +176,11 @@ def interleave4(w, x, y, z):
     # http://graphics.stanford.edu/~seander/bithacks.html#InterleaveTableObvious
     # https://en.wikipedia.org/wiki/Z-order_curve
     # https://stackoverflow.com/questions/1024754/how-to-compute-a-3d-morton-number-interleave-the-bits-of-3-ints
-    n = 0
-    bit_length = max(w.bit_length(), x.bit_length(), y.bit_length(), z.bit_length())
-    for i in range(bit_length):
-        n <<= 4
-        n |= (1 & (w >> ((bit_length - 1) - i)))
-        n |= (1 & (x >> ((bit_length - 1) - i))) << 1
-        n |= (1 & (y >> ((bit_length - 1) - i))) << 2
-        n |= (1 & (z >> ((bit_length - 1) - i))) << 3
-    return n
+    return part1by3(w) | (part1by3(x) << 1) | (part1by3(y) << 2) | (part1by3(z) << 3)
+
+
+def deinterleave4(n):
+    """
+    Deinterleaves an integer into four integers.
+    """
+    return unpart1by3(n), unpart1by3(n >> 1), unpart1by3(n >> 2), unpart1by3(n >> 3)
